@@ -1,0 +1,62 @@
+﻿@model ProductCategoryViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_AdminLayout";
+}
+<div class="container border-info table-bordered">
+    <h3>Edit product</h3>
+    <hr />
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="@Model.Product.ProductID" value="@Model.Product.ProductID" />
+        <input type="hidden" asp-for="@Model.Product.UnitsOnOrder" value="@Model.Product.UnitsOnOrder" />
+        <input type="hidden" asp-for="@Model.Product.ReorderLevel" value="@Model.Product.ReorderLevel" />
+
+        <div class="form-group">
+
+            <label asp-for="@Model.Product.ProductName">Product name : </label>
+            <input class="form-control" asp-for="@Model.Product.ProductName" />
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Product.Category">Category : </label>
+
+            <select asp-for="@Model.Product.CategoryID" class="custom-select form-control">
+                <option>Curently selected : @Model.Product.Category.CategoryName</option>
+                @foreach (var c in Model.Categories)
+                {
+                    <option value="@c.CategoryID">@c.CategoryName</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Product.UnitPrice">Unit Price : </label>
+            <input class="form-control" asp-for="@Model.Product.UnitPrice" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Product.UnitsInStock">Units in stock : </label>
+            <input class="form-control" asp-for="@Model.Product.UnitsInStock" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Product.QuantityPerUnit">Quantity per unit : </label>
+            <input class="form-control" asp-for="@Model.Product.QuantityPerUnit" />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="@Model.Product.Discounted">Discounted : </label>
+            <input type="checkbox" class="form-control" asp-for="@Model.Product.Discounted" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+
+    </form>
+
+
+</div>
+
+
+
+

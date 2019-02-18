@@ -1,0 +1,93 @@
+﻿@*@model ProductListViewModel
+
+    @{
+        ViewData["Title"] = "List";
+    }
+
+    <h1>List</h1>
+
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ProductID
+                </th>
+                <th>
+                    Product Name
+                </th>
+                <th>
+                    Quantity per Unit
+                </th>
+                <th>
+                    Unit Price
+                </th>
+                <th>
+                    Units in stock
+                </th>
+                <th>
+                    Units on order
+                </th>
+                <th>
+                    Reorder level
+                </th>
+                <th>
+                    Discounted
+                </th>
+                <th></th>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Products) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+                </td>
+                <td>
+                    @item.UnitPrice.ToString("C")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReorderLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discounted)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+    <div page-model="@Model.PagingInfo" page-action="List"></div>*@
+
+
+@model ProductListViewModel
+@foreach (var p in Model.Products)
+{
+   @*@Html.Partial("ProductSummary",p)*@
+    <partial name="ProductSummary" model="p"/>
+}
+<div page-model="@Model.PagingInfo" page-action="List" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-default border-dark"
+     page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+     class="btn-group pull-right m-1">
+</div>
+
+
+
